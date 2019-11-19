@@ -34,7 +34,7 @@ class Directory extends React.Component {
               linkUrl: ''
             },
             {
-              title: 'XFACTOR',
+              title: 'X-FACTOR',
               imageUrl: 'https://f4.bcbits.com/img/a3297651124_10.jpg',
               size: 'large',
               id: 5,
