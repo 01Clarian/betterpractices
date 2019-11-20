@@ -11,7 +11,7 @@ const MenuItem = ({title, imageUrl, history, match, linkUrl}) => (
         }}/>
             <div className ='content'>
                 <h1 className='title'>{title.toUpperCase()}</h1>
-                <span className='subtitle'>STREAM</span>
+                <span className='subtitle'>CONSULTANTS</span>
             </div>
         </div>
 
