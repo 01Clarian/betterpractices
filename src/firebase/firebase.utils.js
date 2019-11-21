@@ -17,37 +17,27 @@ const config =  {
 //execute firebase initialization
 firebase.initializeApp(config);
 
-// create a new user two parameters - userAuth -
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-if(!userAuth) return;
-//if we have user authorization
-// get user id from firestore doc set to userRef
-const userRef = firestore.doc(`users/${userAuth.uid}`);
-
-// get the user reference and snapshot it
-const snapShot = await userRef.get();
-
-console.log(snapShot)
-// if the snapshot identification doesn't exist, create it :
-if(!snapShot.exists) {
-  const {displayName, email} = userAuth;
-  const createdAt = new Date();
+  if(!userAuth) return
+  const userRef = firestore.doc(`users/${userAuth.uid}`)
+  const snapShot =  await userRef.get()
+  console.log(snapShot)
+  
+  if(!snapShot.exists) {
+  const {displayName, email} = userAuth
+  const createdAt = new Date()
   try {
-    //create new ref
-    await userRef.set(
-      {
-        displayName,
-        email,
-        createdAt,
-        ...additionalData
-      }
-    )
+    await userRef.set({
+      displayName,
+      createdAt,
+      email,
+      ...additionalData
+    })
   } catch (error) {
-    console.log('error creating user', error.message)
+    console.error(error)
   }
-}
-// if a snapshot does exist just return the user ref 
-return userRef;
+  }
+  return userRef 
 }
 //hook up authorization and the firestore
 export const auth = firebase.auth();
