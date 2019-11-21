@@ -5,7 +5,7 @@ import HomePage from './pages/homepages/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import {auth} from './firebase/firebase.utils';
+import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 
 class App extends React.Component {
   constructor() {
@@ -14,16 +14,32 @@ class App extends React.Component {
       currentUser: null
     }
   }
-
+  // set unsebscribe to null
   unsubscribeFromAuth = null 
  
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({currentUser: user})
-      console.log(user)
-    })
-  }
+    // if there is user authorization create user profile...
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    if(userAuth) {
+      const userRef = await createUserProfileDocument(userAuth); 
+      //set state to id and the data
+      userRef.onSnapshot(snapShot => {
+       this.setState({
+         currentUser: {
+           id: snapShot.id,
+           ...snapShot.data()
+         }
 
+       }) 
+       console.log(this.state)
+      });
+    }
+    //if there isn't user authorization set state
+    this.setState({currentUser: userAuth});
+    })
+    
+  }
+    // sigout unsubscribe auto when lifecycle changes
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
