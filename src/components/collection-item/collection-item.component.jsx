@@ -18,7 +18,6 @@ const CollectionItem = ({item, itemCount, dispatch}) => {
             <div className='collection-footer'>
 
             <span className='name'>{name}</span>
-            <span className='price'>Q:{itemCount} </span>
 
             <span className='price'> {price}$</span>
             </div>

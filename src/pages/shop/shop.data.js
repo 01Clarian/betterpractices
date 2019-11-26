@@ -1,5 +1,5 @@
-const SHOP_DATA = [
-    {
+const SHOP_DATA = {
+  javascript:  {
       id: 1,
       title: 'JAVASCRIPT',
       routeName: 'javascript',
@@ -34,6 +34,7 @@ const SHOP_DATA = [
           imageUrl: "/images/shop-img/javascript/green-beanie.png",
           price: 35
         },
+
         {
           id: 6,
           name: 'Clear Oceans',
@@ -60,7 +61,7 @@ const SHOP_DATA = [
         }
       ]
     },
-    {
+  python:  {
       id: 2,
       title: 'Python',
       routeName: 'python',
@@ -115,7 +116,7 @@ const SHOP_DATA = [
         }
       ]
     },
-    {
+  php:  {
       id: 3,
       title: 'PHP',
       routeName: 'poets',
@@ -152,10 +153,10 @@ const SHOP_DATA = [
         }
       ]
     },
-    {
+  webDevelopment:  {
       id: 4,
       title: 'Web Development',
-      routeName: 'web-development',
+      routeName: 'webDevelopment',
       items: [
         {
           id: 23,
@@ -201,10 +202,10 @@ const SHOP_DATA = [
         }
       ]
     },
-    {
+  machineLearning:  {
       id: 5,
       title: 'Machine Learning',
-      routeName: 'machine-learning',
+      routeName: 'machineLearning',
       items: [
         {
           id: 30,
@@ -244,6 +245,6 @@ const SHOP_DATA = [
         }
     ]
     }
-      ];
+  };
 
 export default SHOP_DATA;
