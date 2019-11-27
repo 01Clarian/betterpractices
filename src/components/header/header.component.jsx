@@ -9,32 +9,34 @@ import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 import selectCurrentUser from '../../redux/user/user.selector'
 import {selectCartHidden} from '../../redux/cart/cart.selectors'
 import {createStructuredSelector} from 'reselect';
+import {HeaderContainer, LogoContainer, OptionsContainer, OptionLink} from './header.styles';
 
 
 const Header = ({currentUser, hidden}) => (
-    <div className='header'>
-        <Link className='logo-container' to='/' >
+    <HeaderContainer>
+        <LogoContainer to='/' >
         <Logo className='logo' />
-        </Link>
-        <div className="options">
-            <Link className='option' to="/shop">
+        </LogoContainer>
+        <OptionsContainer>
+            <OptionLink to="/shop">
                 REQUEST
-            </Link>
-            <Link className='option'  to="/contact">
+            </OptionLink>
+            <OptionLink to="/contact">
                 CONTACT
-            </Link>
+            </OptionLink>
             {
                 currentUser ?
-                <div className='option' onClick={()=> auth.signOut()}>
+                // you can switch link to a div with as property
+                <OptionLink as='div' onClick={()=> auth.signOut()}>
                     SIGN OUT
-                </div>
+                </OptionLink>
                 :
-                <Link className='option' to='/signin'>SIGN IN</Link>
+                <OptionLink className='option' to='/signin'>SIGN IN</OptionLink>
             }
             <CartIcon />
-        </div>
+        </OptionsContainer>
        {!hidden ? <CartDropDown /> : null}
-    </div>
+    </HeaderContainer>
 )
 
 //current user is coming from the reducer 
