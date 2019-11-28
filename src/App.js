@@ -20,14 +20,6 @@ import './App.css';
 
 
 class App extends React.Component {
-//  constructor() {
-//    super()
-//    this.state= {
-//      currentUser: null
-//    }
-  //}
-
-  // set unsebscribe to null
   unsubscribeFromAuth = null 
  
   componentDidMount() {
@@ -36,7 +28,7 @@ class App extends React.Component {
     // if there is user authorization create user profile...
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     if(userAuth) {
-      const userRef = await createUserProfileDocument(userAuth); 
+      const userRef = await createUserProfileDocument(userAuth)
       //set state to id and the data
       userRef.onSnapshot(snapShot => {
        setCurrentUser({

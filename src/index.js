@@ -7,6 +7,11 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from './redux/store';
 
+// hoc link up to app:
+// redux store provider
+// router
+// persist rehydrate local storage
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
