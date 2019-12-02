@@ -25,3 +25,17 @@ createSelector(
     collections => collections ? collections[collectionUrlParam]
     : null) 
 //data normalization 
+
+export const selectCollectionFetching = createSelector(
+    [selectShop],
+    shop => shop.isFetching
+)
+
+export const selectIsCollectedLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections
+    // converting to boolean without changing the sign = !!
+    //we make it false - and then in the shop component set it to true with!
+    //calling a double bang turns any value !! to false
+    // object!!{} = will get true
+)

@@ -75,6 +75,15 @@ export const covertCollectionsSnapShotToMap = (collections) => {
     }, {})
 }
 
+// on auth onAuthStateChanged succeed or reject promise
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth)}, reject)
+  });
+}
+
 //hook up authorization and the firestore
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
@@ -82,9 +91,9 @@ export const firestore = firebase.firestore();
 //firestore.doc('/users/ejzPpPDX53z6AGQKjGa/cartItems/R3bt5KE64OhaV3ZxZFqI')
  
 //set up google authorization signin and send to custom button
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({prompt: 'select_account'});
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({prompt: 'select_account'});
 // hook up variable signinwithgoogle to signing in popup from provider
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;

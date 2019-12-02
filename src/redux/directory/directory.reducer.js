@@ -23,14 +23,14 @@ const INITIAL_STATE = {
           imageUrl: 'https://skywell.software/wp-content/uploads/2018/12/web-development-1024x605.jpg',
           size: 'large',
           id: 4,
-          linkUrl: 'shop/webDevelopment'
+          linkUrl: 'shop/web-development'
         },
         {
           title: 'MACHINE LEARNING',
           imageUrl: 'https://s3.amazonaws.com/prod-www-blackline-com/blog/wp-content/uploads/2019/01/29163118/A-Conversation-With-BlackLines-Machine-Learning-Experts-720x405.jpg',
           size: 'large',
           id: 5,
-          linkUrl: 'shop/machineLearning'
+          linkUrl: 'shop/machine-learning'
         }
       ]
 }

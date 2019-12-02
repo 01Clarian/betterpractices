@@ -22,6 +22,11 @@ const INITIAL_STATE = {
                 ...state,
                 cartItems:state.cartItems.filter(cartItem => cartItem.id !== action.payload.id)
             }
+            case CartActionTypes.CLEAR_CART : 
+            return {
+                ...state,
+                cartItems:[]
+            }
         case CartActionTypes.REMOVE_ITEM : 
         return {
             ...state,
