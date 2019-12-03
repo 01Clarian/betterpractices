@@ -24,17 +24,15 @@ export function* signInWithGoogle() {
     try {
         const {user} = yield auth.signInWithPopup(googleProvider)
         yield getSnapShotFromUserAuth(user)
-    }   catch(error) {
-        yield put(SignInFailure(error))
-    } 
+    } catch (error) {
+        yield put(signUpFailure(error))
+    }
 }
 
-export function *signUp() {
-
-}
 
 export function* signInWithEmail({payload: {email, password}}) {
     try {
+        // destructuring create user from auth.signIn
         const {user} = yield auth.signInWithEmailAndPassword(email, password)
         yield getSnapShotFromUserAuth(user)
     } catch(error) {
@@ -104,28 +102,6 @@ export function* onSignUpSuccess() {
 export function* signInAfterSignUp({payload: {user, additionalData}}) {
     yield getSnapShotFromUserAuth(user, additionalData)
 }
- 
-      //  const {displayName, email, password, confirmPassword} = this.state;
-    //    if (password !== confirmPassword) {
-    //        alert('passwords don\'t match');
-    //        return;
-    //    }
-    //    try {
-    //        const {user} = await auth.createUserWithEmailAndPassword
-    //        (email, password)
-
-     //   await  createUserProfileDocument(user, {displayName});
-
-      //  this.setState({
-       //     displayName: '',
-       //     email: '',
-       //     password: '',
-       //     confirmPassword: ''
-      ///  })
-
-        //} catch (error) {
-        //    console.error(error)
-        //}
 
 
 export function* userSagas() {

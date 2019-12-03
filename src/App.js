@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -18,38 +18,20 @@ import {checkUserSession} from './redux/user/user.actions'
 import './App.css';
 
 
-class App extends React.Component {
-  unsubscribeFromAuth = null 
+const App = ({checkUserSession, currentUser}) => {
  
-  componentDidMount() {
-    const {checkUserSession} = this.props
+  useEffect(()=>{
     checkUserSession()
-    // if there is user authorization create user profile...
-  //  this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-  ///  if(userAuth) {
-   ///   const userRef = await createUserProfileDocument(userAuth)
-      //set state to id and the data
-   //   userRef.onSnapshot(snapShot => {
-   //    setCurrentUser({
-    //     currentUser: {
-     //      id: snapShot.id,
-      //     ...snapShot.data()
-     //    }
-     //  }) 
-    //  });
-    //}
-
-    //if there isn't user authorization set state
-  //  setCurrentUser(userAuth);
-  //  })
-    
-  }
-    // sigout unsubscribe auto when lifecycle changes
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  }, [checkUserSession])
   
-render(){  return (
+  //unsubscribeFromAuth = null 
+
+    // sigout unsubscribe auto when lifecycle changes
+  //componentWillUnmount() {
+  //  this.unsubscribeFromAuth();
+ // }
+  
+ return (
     <div className="App">
         <div>
           <Header  />
@@ -59,7 +41,7 @@ render(){  return (
           <Route path="/checkout" component={CheckoutPage} />
           <Route exact path='/signin' 
           render={()=> 
-          this.props.currentUser ? (
+          currentUser ? (
           <Redirect to='/' /> ) : (<SignInAndSignUpPage />
             )
           }  
@@ -68,7 +50,7 @@ render(){  return (
         </div>
     </div>
   );
-}}
+}
 
 const mapDispatchToProps = (dispatch) => ({
   checkUserSession: () => dispatch(checkUserSession())

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -6,21 +6,13 @@ import {connect} from 'react-redux'
 import {signUpStart} from '../../redux/user/user.actions';
 import './sign-up.styles.scss';
 
-class SignUp extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        }
-    }
+const SignUp = ({signUp}) => {
+    const [userInfo, setUserInfo] = useState({displayName: '',
+    email: '', password: '', confirmPassword: ''})
 
-    handleSubmit = async e => {
+ const {displayName, email, password, confirmPassword} = userInfo
+   const handleSubmit = async e => {
         e.preventDefault();
-        const {displayName, email, password, confirmPassword} = this.state
-        const {signUp} = this.props
 
         if (password !== confirmPassword) {
             alert('passwords don\'t match');
@@ -29,45 +21,21 @@ class SignUp extends React.Component {
         signUp({displayName, email, password})
     };
 
-  //  const {displayName, email, password, confirmPassword} = this.state;
-    //    if (password !== confirmPassword) {
-    //        alert('passwords don\'t match');
-    //        return;
-    //    }
-    //    try {
-    //        const {user} = await auth.createUserWithEmailAndPassword
-    //        (email, password)
-
-     //   await  createUserProfileDocument(user, {displayName});
-
-      //  this.setState({
-       //     displayName: '',
-       //     email: '',
-       //     password: '',
-       //     confirmPassword: ''
-      ///  })
-
-        //} catch (error) {
-        //    console.error(error)
-        //}
-
-    handleChange = event => {
+  const  handleChange = event => {
         const {name, value} = event.target
-        this.setState({[name]: value})
+        setUserInfo({...userInfo, [name]: value})
     }
 
-    render() {
-        const {displayName, email, password, confirmPassword} = this.state;
         return(
             <div className="sign-up">
                 <div className='title'>I do not have an account</div>
                 <span>Sign up with your email and password</span>
-                <form className='sign-up-form' onSubmit={this.handleSubmit}>
+                <form className='sign-up-form' onSubmit={handleSubmit}>
                     <FormInput
                     type='text'
                     name='displayName'
                     value={displayName}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     label="Display Name"
                     required
                     />
@@ -75,7 +43,7 @@ class SignUp extends React.Component {
                     type='email'
                     name='email'
                     value={email}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     label="Email"
                     required
                     />
@@ -83,7 +51,7 @@ class SignUp extends React.Component {
                     type='password'
                     name='password'
                     value={password}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     label="Password"
                     required
                     />
@@ -91,7 +59,7 @@ class SignUp extends React.Component {
                     type='password'
                     name='confirmPassword'
                     value={confirmPassword}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     label="Confirm Password"
                     required
                     />
@@ -100,7 +68,6 @@ class SignUp extends React.Component {
             </div>
         )
     }    
-}
 
 const mapDispatchToProps = (dispatch) => ({
     signUp: (userCredentials)=> dispatch(signUpStart(userCredentials))

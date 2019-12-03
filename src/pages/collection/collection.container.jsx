@@ -13,7 +13,10 @@ const mapStateToProps = createStructuredSelector({
 
 const CollectionsPageContainer = compose(
     connect(mapStateToProps),
-    WithSpinner)
-    (CollectionPage);
+    WithSpinner)(CollectionPage);
 
     export default CollectionsPageContainer
+
+
+
+    

@@ -1,8 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import './header.styles.scss';
 import {ReactComponent as Logo} from '../../assets/crown.svg'
-import {auth} from '../../firebase/firebase.utils';
 import {connect} from 'react-redux';
 import CartIcon from '../cart-icon/cart-icon.component'
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
@@ -19,7 +17,7 @@ const Header = ({currentUser, hidden, signOutStart}) => (
         </LogoContainer>
         <OptionsContainer>
             <OptionLink to="/shop">
-                REQUEST
+                TEACHERS
             </OptionLink>
             <OptionLink to="/contact">
                 CONTACT
@@ -27,9 +25,9 @@ const Header = ({currentUser, hidden, signOutStart}) => (
             {
                 currentUser ?
                 // you can switch link to a div with as property
-                <OptionLink as='div' onClick={signOutStart}>
+                <div onClick={signOutStart}>
                     SIGN OUT
-                </OptionLink>
+                </div>
                 :
                 <OptionLink className='option' to='/signin'>SIGN IN</OptionLink>
             }
